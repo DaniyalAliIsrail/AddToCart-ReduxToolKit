@@ -6,10 +6,11 @@ import { removeItem, increaseItemQuantity, removeItemQuantity, getCartTotal } fr
 const TotalCartPage = () => {
   const { cart, totalPrice, totalQuantity } = useSelector((state) => state.cartData);
   const dispatch = useDispatch();
-
+  
+  
   useEffect(() => {
     dispatch(getCartTotal());
-  }, [dispatch]);
+  }, [cart , dispatch , totalPrice , totalQuantity]);
 
   return (
     <div className="bg-gray-100 min-h-screen py-8">
