@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getCartTotal } from "../features/cartSlice";
+import { getCartTotal ,removeItem ,  increaseItemQuantity, removeItemQuantity} from "../features/cartSlice";
 
 const TotalCartPage = () => {
-  const {cart , totalPrice , totalQuantity} = useSelector((state)=>{
+  const {cart , totalPrice , totalQuantity  } = useSelector((state)=>{
     return state.cartData
   })
   console.log(cart);
@@ -46,18 +46,18 @@ const TotalCartPage = () => {
                   <td className="py-4">{item.price}$</td>
                   <td className="py-4">
                     <div className="flex items-center">
-                      <button className="border rounded-md py-2 px-4 mr-2">
+                      <button onClick={()=> dispatch(removeItemQuantity(item.id))} className="border rounded-md py-2 px-4 mr-2">
                         -
                       </button>
                       <span className="text-center w-8">{item.quantity}</span>
-                      <button className="border rounded-md py-2 px-4 ml-2">
+                      <button onClick={()=> dispatch(increaseItemQuantity(item.id))} className="border rounded-md py-2 px-4 ml-2">
                         +
                       </button>
                     </div>
                   </td>
                   
 
-                  <td className=" text-red-600 py-4">remove</td>
+                  <td className=" text-red-600 py-4" onClick={()=> dispatch(removeItem(item.id))} >remove</td>
                 </tr>
                 ))
               }
@@ -73,7 +73,7 @@ const TotalCartPage = () => {
           <h2 className="text-lg font-semibold mb-4">Summary</h2>
           <div className="flex justify-between mb-2">
             <span>Total Quantity</span>
-            <span>200</span>
+            <span>{totalQuantity}</span>
           </div>
           <div className="flex justify-between mb-2">
             <span className="font-semibold">Total Amount</span>

@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getCartTotal } from "../features/cartSlice";
 
 const MyNavbar = () => {
-  // const {cart , totalQuantity} =useSelector((state)=> state.allcart)
+  const {cart } =useSelector((state)=> state.cartData)
 
-  // const dispatch = useDispatch()
-  // useEffect(()=>{
-  //   dispatch(getCartTotal());
-  //   console.log(totalQuantity);
-  // },[cart])
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(getCartTotal());
+  },[cart])
 
   return (
     <>
@@ -22,7 +22,7 @@ const MyNavbar = () => {
           <div>All Product</div>
           </Link>
           <Link to="/Addcart">
-          <div>Cart : 0 </div>
+          <div>Cart : {cart.length} </div>
           </Link>
         </div>
       </div>
