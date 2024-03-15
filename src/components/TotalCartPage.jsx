@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getCartTotal } from "../features/cartSlice";
 
 const TotalCartPage = () => {
   const {cart , totalPrice , totalQuantity} = useSelector((state)=>{
@@ -9,6 +9,9 @@ const TotalCartPage = () => {
   console.log(totalPrice);
   console.log(totalQuantity);
   
+  const dispatch = useDispatch()
+  dispatch(getCartTotal())
+
   return <>
   <div className="bg-gray-100 h-screen py-8">
   <div className="container mx-auto px-4">
@@ -18,9 +21,7 @@ const TotalCartPage = () => {
         <div className="bg-white rounded-lg shadow-md p-6 mb-4">
           <table className="w-full">
             <thead>
-             
               <tr>
-                
                 <th className="text-left font-semibold">Product</th>
                 <th className="text-left font-semibold">Price</th>
                 <th className="text-left font-semibold">Quantity</th>
@@ -76,7 +77,7 @@ const TotalCartPage = () => {
           </div>
           <div className="flex justify-between mb-2">
             <span className="font-semibold">Total Amount</span>
-            <span>$1.99</span>
+            <span>{totalPrice}</span>
           </div>
          
           <hr className="my-2" />
@@ -89,7 +90,6 @@ const TotalCartPage = () => {
     </div>
   </div>
 </div>
-
 
   </>;
 };
