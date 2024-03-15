@@ -13,8 +13,15 @@ export const cartSlice = createSlice({
     initialState,
     reducers:{
         addToCart : (state,action)=>{
-            // console.log(state);
-            state.cart.push(action.payload)
+            let find = state.cart.findIndex((item)=>{
+                return item.id === action.payload.id
+            })
+            console.log(find);
+            if(find >= 0){
+                state.cart[find].quantity++
+            }else{
+                state.cart.push(action.payload)
+            }
         }
     }
 })
